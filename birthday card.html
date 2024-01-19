@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Template</title>
+    <style>
+          body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: black;
+      }
+
+      /* Style for the birthday card */
+      .birthday-card {
+        border: 2px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f8f8f8;
+        text-align: center;
+        max-width: 400px;
+        width: 1000px;
+      }
+
+      .input-container {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+
+      .greeting {
+        font-size: 18px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+  
+    const BirthdayCard = () => {
+      const [userName, setUserName] = React.useState('');
+      const [userMessage, setUserMessage] = React.useState('');
+
+      const handleNameChange = (event) => {
+        setUserName(event.target.value);
+      };
+
+      const handleMessageChange = (event) => {
+        setUserMessage(event.target.value);
+      };
+
+      return (
+        <>
+          <div className="birthday-card">
+            <h2>Happy Birthday!</h2>
+
+            <div className="input-container">
+              <label htmlFor="userName">Recipient's Name:</label>
+              <input
+                type="text"
+                id="userName"
+                value={userName}
+                onChange={handleNameChange}
+              />
+            </div>
+
+            <div className="input-container">
+              <label htmlFor="customMessage">Custom Message:</label>
+              <textarea
+                id="customMessage"
+                value={userMessage}
+                onChange={handleMessageChange}
+              />
+            </div>
+
+            <p className="greeting">
+              {` ${userName || 'Wishing U A Very Happy Birthday' }! ${userMessage}`}
+            </p>
+          </div>
+        </>
+      );
+    }
+
+    ReactDOM.render(<BirthdayCard />, document.getElementById('root'));
+
+  </script>
+</html>

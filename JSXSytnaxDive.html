@@ -1,0 +1,62 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+
+
+const JSXShowcase = () => {
+  const isLoggedIn = true;
+  const username = 'John Doe';
+  const numbers = [1, 2, 3, 4, 5];
+
+  const generateRandomNumber = () => Math.floor(Math.random() * 100);
+
+  return (
+    <div>
+      {/* Heading */}
+      <h1>JSX Showcase</h1>
+
+      {/* Paragraph with JavaScript Expression */}
+      <p>Welcome, {isLoggedIn ? username : 'Guest'}!</p>
+
+      {/* Button with Event Handling */}
+      <button onClick={() => alert('Button Clicked!')}>Click me</button>
+
+      {/* List using JavaScript Array */}
+      <ul>
+        {numbers.map((number) => (
+          <li key={number}>{number}</li>
+        ))}
+      </ul>
+
+      {/* Conditional Rendering */}
+      {isLoggedIn ? (
+        <p>User is logged in.</p>
+      ) : (
+        <p>User is not logged in.</p>
+      )}
+
+      {/* Rendering the result of a function */}
+      <p>Random Number: {generateRandomNumber()}</p>
+    </div>
+  );
+};
+
+
+
+
+
+
+ReactDOM.render(<JSXShowcase />, document.getElementById('root'));
+  </script>
+</html>

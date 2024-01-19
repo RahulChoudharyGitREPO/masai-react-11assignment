@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App with Tailwind CSS</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="flex items-center justify-center h-screen bg-gray-100">
+    <div id="root" class="bg-white p-8 rounded bg-slate-800 shadow-md w-full max-w-md">
+      <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+      <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+      <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+      <script type="text/babel">
+
+        const { useState } = React;
+
+      // Child Component: AddTodo
+      const AddTodo = ({ onAddTodo }) => {
+        const [newTodo, setNewTodo] = useState('');
+
+        const handleInputChange = (e) => {
+          setNewTodo(e.target.value);
+        };
+
+        const handleAddTodo = () => {
+          if (newTodo.trim() !== '') {
+            onAddTodo(newTodo);
+            setNewTodo('');
+          }
+        };
+
+        return (
+          <div>
+            <input
+              type="text"
+              placeholder="Add new task"
+              value={newTodo}
+              onChange={handleInputChange}
+            />
+            <button onClick={handleAddTodo}  className="m-10 bg-gray-800 text-white p-4 rounded">Add</button>
+          </div>
+        );
+      };
+
+      // Child Component: TodoList
+      const TodoList = ({ todos, onDeleteTodo, onToggleComplete }) => {
+        return (
+          <ul>
+            {todos.map((todo, index) => (
+              <li key={index}>
+                <span
+                  style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+                >
+                  {todo.text}
+                </span>
+                <button  className="m-10 bg-gray-800 text-white p-4 rounded" onClick={() => onDeleteTodo(index)}>Delete</button>
+                <button className="m-10 bg-gray-800 text-white p-4 rounded" onClick={() => onToggleComplete(index)}>
+                  {todo.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
+                </button>
+              </li>
+            ))}
+          </ul>
+        );
+      };
+
+      const TodoApp = () => {
+          const [todos, setTodos] = useState([]);
+
+          const addTodo = (text) => {
+            const newTodo = { text, completed: false };
+            setTodos([...todos, newTodo]);
+          };
+
+          const deleteTodo = (index) => {
+            const updatedTodos = todos.filter((_, i) => i !== index);
+            setTodos(updatedTodos);
+          };
+
+          const toggleComplete = (index) => {
+            const updatedTodos = todos.map((todo, i) =>
+              i === index ? { ...todo, completed: !todo.completed } : todo
+            );
+            setTodos(updatedTodos);
+          };
+
+          return (
+            <div>
+              <h1 className="text-2xl font-bold  mb-4 text-center">Todo App</h1>
+              <AddTodo onAddTodo={addTodo} />
+              <TodoList
+                todos={todos}
+                onDeleteTodo={deleteTodo}
+                onToggleComplete={toggleComplete}
+              />
+            </div>
+          );
+        };
+
+        ReactDOM.render(<TodoApp />, document.getElementById('root'));
+
+      </script>
+    </div>
+  </body>
+</html>

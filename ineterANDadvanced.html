@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+    // Advanced
+
+    const isSeizingTheDay = true; 
+
+    const element = isSeizingTheDay
+      ? React.createElement('p', null, 'Seize the day')
+      : React.createElement('p', null, 'Make the most of it');
+
+      ReactDOM.render(element, document.getElementById('root'));
+   
+
+
+
+
+
+
+    // Intermediate
+
+    const message = "Seize the day";
+    
+const element2 = <p>{message}</p>;
+
+    ReactDOM.render(element2, document.getElementById('root'));
+
+  </script>
+</html>

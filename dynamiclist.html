@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boilerplate Code</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+    const ItemList = (props) => {
+      const { items } = props;
+
+      return (
+        <div>
+          {items.length > 0 ? (
+            <ul>
+              {items.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No items found</p>
+          )}
+        </div>
+      );
+    };
+
+    const App = () => {
+      const itemListData1 = ["Apple", "Banana", "Cherry"];
+      const itemListData2 = []; 
+
+      return (
+        <div>
+          {/* Test with an array containing items */}
+          <ItemList items={itemListData1} />
+
+          {/* Test with an empty array */}
+          <ItemList items={itemListData2} />
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</html>
